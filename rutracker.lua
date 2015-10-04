@@ -75,7 +75,7 @@ wget.callbacks.get_urls = function(file, url, is_css, iri)
     end
   end
   
-  if (string.match(url, "[^0-9]"..item_value.."[0-9]") and not string.match(url, "[^0-9]"..item_value.."[0-9][0-9]")) or string.match(url, "^https?://[^/]*fastpic.ru") or string.match(url, "^https?://[^/]*radikal.ru") or string.match(url, "^https?://[^/]*imageban.ru") or string.match(url, "^https?://[^/]*imagebam.com") or string.match(url, "^https?://[^/]*lostpic.net") then
+  if (string.match(url, "[^0-9]"..item_value.."[0-9]") and not string.match(url, "[^0-9]"..item_value.."[0-9][0-9]")) or string.match(url, "^https?://[^/]*fastpic.ru") or string.match(url, "^https?://[^/]*f%-picture.net") or string.match(url, "^https?://[^/]*radikal.ru") or string.match(url, "^https?://[^/]*imageban.ru") or string.match(url, "^https?://[^/]*imagebam.com") or string.match(url, "^https?://[^/]*lostpic.net") then
     html = read_file(file)
     for newurl in string.gmatch(html, '([^"]+)') do
       checknewurl(newurl)
@@ -91,6 +91,9 @@ wget.callbacks.get_urls = function(file, url, is_css, iri)
     end
     if string.match(url, "https?://api%.rutracker%.org/v1/get_tor_hash%?by=topic_id&val=") and string.match(html, '"'..item_value..'[0-9]":"([^"]+)"') then
       check("http://api.rutracker.org/v1/get_topic_id?by=hash&val="..string.match(html, '"'..item_value..'[0-9]":"([^"]+)"'), url)
+    end
+    if string.match(url, "&guest=1") and not string.match(url, "&dummy=") then
+      check(url.."&dummy=")
     end
   end
   
