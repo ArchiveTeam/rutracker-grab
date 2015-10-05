@@ -129,7 +129,7 @@ wget.callbacks.httploop_result = function(url, err, http_stat)
       io.stdout:write("\nI give up...\n")
       io.stdout:flush()
       tries = 0
-      if string.match(url, "https?://[^/]*rutracker%.org[^/]*") then
+      if string.match(url["url"], "https?://[^/]*rutracker%.org[^/]*") then
         return wget.actions.ABORT
       else
         return wget.actions.EXIT
@@ -146,7 +146,7 @@ wget.callbacks.httploop_result = function(url, err, http_stat)
       io.stdout:write("\nI give up...\n")
       io.stdout:flush()
       tries = 0
-      if string.match(url, "https?://[^/]*rutracker%.org[^/]*") then
+      if string.match(url["url"], "https?://[^/]*rutracker%.org[^/]*") then
         return wget.actions.ABORT
       else
         return wget.actions.EXIT
@@ -159,7 +159,7 @@ wget.callbacks.httploop_result = function(url, err, http_stat)
   tries = 0
 
   local sleep_time = 0
-  if string.match(url, "https?://[^/]*rutracker%.org[^/]*") then
+  if string.match(url["url"], "https?://[^/]*rutracker%.org[^/]*") then
     sleep_time = 0.2
   end
 
