@@ -159,6 +159,9 @@ wget.callbacks.httploop_result = function(url, err, http_stat)
   tries = 0
 
   local sleep_time = 0
+  if string.match(url, "https?://[^/]*rutracker%.org[^/]*") then
+    sleep_time = 0.2
+  end
 
   if sleep_time > 0.001 then
     os.execute("sleep " .. sleep_time)
