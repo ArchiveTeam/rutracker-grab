@@ -57,7 +57,7 @@ if not WGET_LUA:
 #
 # Update this each time you make a non-cosmetic change.
 # It will be added to the WARC files and reported to the tracker.
-VERSION = "20151004.02"
+VERSION = "20151005.01"
 USER_AGENT = 'ArchiveTeam'
 TRACKER_ID = 'rutracker'
 TRACKER_HOST = 'tracker.archiveteam.org'
@@ -226,8 +226,7 @@ project = Project(
         <img class="project-logo" alt="Project logo" src="http://archiveteam.org/images/c/c7/Rutracker_logo.png" height="50px" title=""/>
         <h2>rutracker.org<span class="links"><a href="http://rutracker.org/">Website</a> &middot; <a href="http://tracker.archiveteam.org/rutracker/">Leaderboard</a></span></h2>
         <p>Rutracker might be going down soon.</p>
-    """,
-    utc_deadline=datetime.datetime(2015, 10, 8, 23, 59, 0)
+    """
 )
 
 pipeline = Pipeline(
