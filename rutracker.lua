@@ -33,7 +33,7 @@ wget.callbacks.download_child_p = function(urlpos, parent, depth, start_url_pars
   end
   
   if downloaded[url] ~= true and addedtolist[url] ~= true then
-    if (string.match(url, "[^0-9]"..item_value.."[0-9]") and not string.match(url, "[^0-9]"..item_value.."[0-9][0-9]")) or html == 0 then
+    if ((string.match(url, "[^0-9]"..item_value.."[0-9]") and not string.match(url, "[^0-9]"..item_value.."[0-9][0-9]")) or html == 0) and not string.match(url, "^https?://[^/]*ipicture.ru") then
       addedtolist[url] = true
       return true
     else
@@ -51,7 +51,7 @@ wget.callbacks.get_urls = function(file, url, is_css, iri)
   
   local function check(urla, origurl)
     local url = string.match(urla, "^([^#]+)")
-    if (downloaded[url] ~= true and addedtolist[url] ~= true) and ((string.match(url, "[^0-9]"..item_value.."[0-9]") and not string.match(url, "[^0-9]"..item_value.."[0-9][0-9]")) or string.match(url, "get_topic_id") or string.match(url, "viewtopic%.php%?p=") or string.match(url, "%.jpg$") or string.match(url, "%.png$") or string.match(url, "%.gif$") or string.match(url, "%.jpeg$") or (string.match(url, "^https?://[^/]*fastpic.ru") and not string.match(origurl, "^https?://[^/]*fastpic.ru")) or (string.match(url, "^https?://[^/]*radikal.ru") and not string.match(origurl, "^https?://[^/]*radikal.ru")) or (string.match(url, "^https?://[^/]*imageban.ru") and not string.match(origurl, "^https?://[^/]*imageban.ru")) or (string.match(url, "^https?://[^/]*imagebam.com") and not string.match(origurl, "^https?://[^/]*imagebam.com")) or (string.match(url, "^https?://[^/]*lostpic.net") and not string.match(origurl, "^https?://[^/]*lostpic.net"))) then
+    if ((downloaded[url] ~= true and addedtolist[url] ~= true) and ((string.match(url, "[^0-9]"..item_value.."[0-9]") and not string.match(url, "[^0-9]"..item_value.."[0-9][0-9]")) or string.match(url, "get_topic_id") or string.match(url, "viewtopic%.php%?p=") or string.match(url, "%.jpg$") or string.match(url, "%.png$") or string.match(url, "%.gif$") or string.match(url, "%.jpeg$") or (string.match(url, "^https?://[^/]*fastpic.ru") and not string.match(origurl, "^https?://[^/]*fastpic.ru")) or (string.match(url, "^https?://[^/]*radikal.ru") and not string.match(origurl, "^https?://[^/]*radikal.ru")) or (string.match(url, "^https?://[^/]*imageban.ru") and not string.match(origurl, "^https?://[^/]*imageban.ru")) or (string.match(url, "^https?://[^/]*imagebam.com") and not string.match(origurl, "^https?://[^/]*imagebam.com")) or (string.match(url, "^https?://[^/]*lostpic.net") and not string.match(origurl, "^https?://[^/]*lostpic.net")))) and not string.match(url, "^https?://[^/]*ipicture.ru") then
       if string.match(url, "&amp;") then
         table.insert(urls, { url=string.gsub(url, "&amp;", "&") })
         addedtolist[url] = true
