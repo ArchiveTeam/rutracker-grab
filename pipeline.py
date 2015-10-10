@@ -57,7 +57,7 @@ if not WGET_LUA:
 #
 # Update this each time you make a non-cosmetic change.
 # It will be added to the WARC files and reported to the tracker.
-VERSION = "20151006.02"
+VERSION = "20151010.01"
 USER_AGENT = 'ArchiveTeam'
 TRACKER_ID = 'rutracker'
 TRACKER_HOST = 'tracker.archiveteam.org'
@@ -194,7 +194,7 @@ class WgetArgs(object):
         item['item_type'] = item_type
         item['item_value'] = item_value
         
-        assert item_type in ('thread')
+        assert item_type in ('thread', 'forum')
 
         if item_type == 'thread':
             suffixes = string.digits
@@ -203,6 +203,13 @@ class WgetArgs(object):
                 wget_args.append('http://api.rutracker.org/v1/get_peer_stats?by=topic_id&val={0}{1}'.format(item_value, suffix))
                 wget_args.append('http://api.rutracker.org/v1/get_tor_hash?by=topic_id&val={0}{1}'.format(item_value, suffix))
                 wget_args.append('http://api.rutracker.org/v1/get_tor_topic_data?by=topic_id&val={0}{1}'.format(item_value, suffix))
+        if item_type == 'forum':
+            suffixes = string.digits
+            for suffix in suffixes:
+                wget_args.append('http://rutracker.org/forum/viewforum.php?f={0}{1}'.format(item_value, suffix))
+                wget_args.append('http://api.rutracker.org/v1/get_forum_name?by=forum_id&val={0}{1}'.format(item_value, suffix))
+                wget_args.append('http://api.rutracker.org/v1/get_forum_data?by=forum_id&val={0}{1}'.format(item_value, suffix))
+                wget_args.append('http://api.rutracker.org/v1/static/pvc/f/{0}{1}'.format(item_value, suffix))
         else:
             raise Exception('Unknown item')
         
